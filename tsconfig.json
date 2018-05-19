@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "lib": ["es5", "es6"],
+    "target": "esnext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "mapRoot": "dist",
+    "sourceRoot": "src",
+    "removeComments": true,
+    "plugins": [
+      {
+        "name": "tslint-language-service",
+        "configFile": "./tslint.json",
+        "supressWhileTypeErrorsPresent": false,
+        "disableNoUnusedVariableRule": false,
+        "mockTypeScriptVersion": false,
+        "ignoreDefinitionFiles": false
+      }
+    ]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
