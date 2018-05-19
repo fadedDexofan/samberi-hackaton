@@ -1,7 +1,7 @@
 import { createConnection } from "typeorm";
 import app from "./app";
 
-const PORT: number = 3000;
+const { PORT } = process.env;
 
 createConnection()
   .then(async (connection) => {
