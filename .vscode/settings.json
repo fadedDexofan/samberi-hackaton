@@ -1,0 +1,26 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/dist": true,
+    "**/coverge": true
+  },
+  "cSpell.words": [
+    "algolia",
+    "csrf",
+    "definitelytyped",
+    "mongoolia",
+    "promisified",
+    "middlewares",
+    "virtuals",
+    "backend",
+    "timestamps",
+    "токен",
+    "typeorm",
+    "bodyparser",
+    "samberi",
+    "postgres"
+  ],
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib"
+}
