@@ -1,19 +1,19 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
   BaseEntity,
-  ManyToMany,
+  Column,
+  Entity,
   JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { Buy } from "./Buy";
 
 @Entity()
 export class Consumer extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn() public id: number;
 
-  @Column() name: string;
+  @Column() public name: string;
   @ManyToMany((type) => Buy, (buy) => buy.consumers, { cascade: true })
   @JoinTable()
-  buys: Buy[];
+  public buys: Buy[];
 }

@@ -1,18 +1,18 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
   BaseEntity,
+  Column,
+  Entity,
   ManyToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { Category } from "./Category";
 
 @Entity()
 export class Goods extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
-  @Column() name: string;
+  @PrimaryGeneratedColumn() public id: number;
+  @Column() public name: string;
   @Column({ type: "real" })
-  cost: number;
+  public cost: number;
   @ManyToOne((type) => Category, (category) => category.goods)
-  category: Category;
+  public category: Category;
 }

@@ -1,11 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Shop extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
-  @Column() address: string;
+  @PrimaryGeneratedColumn() public id: number;
+  @Column() public address: string;
   @Column({ type: "double precision" })
-  longitude: number;
+  public longitude: number;
   @Column({ type: "double precision" })
-  latitude: number;
+  public latitude: number;
 }

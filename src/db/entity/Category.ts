@@ -1,16 +1,16 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
   BaseEntity,
+  Column,
+  Entity,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { Goods } from "./Goods";
 
 @Entity()
 export class Category extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
-  @Column() name: string;
+  @PrimaryGeneratedColumn() public id: number;
+  @Column() public name: string;
   @OneToMany((type) => Goods, (goods) => goods.category, { cascade: true })
-  goods: Goods[];
+  public goods: Goods[];
 }

@@ -1,5 +1,5 @@
-import app from "./app";
 import { createConnection } from "typeorm";
+import app from "./app";
 
 const PORT: number = 3000;
 

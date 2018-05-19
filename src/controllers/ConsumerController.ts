@@ -1,9 +1,9 @@
 import Koa from "koa";
 import { getRepository } from "typeorm";
-import { Consumer } from "../db/entity/Consumer";
 import { Buy } from "../db/entity/Buy";
+import { Consumer } from "../db/entity/Consumer";
 
-//export const getAllCostumers
+// export const getAllCostumers
 
 export const newConsumer = async (ctx: Koa.Context) => {
   const consumerRepository = getRepository(Consumer);

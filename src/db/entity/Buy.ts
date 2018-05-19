@@ -1,21 +1,21 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   BaseEntity,
   CreateDateColumn,
-  ManyToMany,
+  Entity,
   JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
-import { Goods } from "./Goods";
 import { Consumer } from "./Consumer";
+import { Goods } from "./Goods";
 
 @Entity()
 export class Buy extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn() public id: number;
   @ManyToMany((type) => Goods)
   @JoinTable()
-  goods: Goods[];
+  public goods: Goods[];
   @ManyToMany((type) => Consumer, (consumer) => consumer.buys)
-  consumers: Consumer[];
-  @CreateDateColumn() date: Date;
+  public consumers: Consumer[];
+  @CreateDateColumn() public date: Date;
 }

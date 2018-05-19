@@ -1,6 +1,6 @@
-import "reflect-metadata";
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
+import "reflect-metadata";
 import router from "./routes";
 
 const app = new Koa();

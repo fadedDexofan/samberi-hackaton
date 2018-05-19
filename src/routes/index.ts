@@ -1,10 +1,10 @@
 import Router from "koa-router";
-import * as categoryController from "../controllers/CategoryController";
-import * as goodsController from "../controllers/GoodsController";
-import * as consumerController from "../controllers/ConsumerController";
 import * as buyController from "../controllers/BuyController";
-import * as shopController from "../controllers/ShopController";
+import * as categoryController from "../controllers/CategoryController";
+import * as consumerController from "../controllers/ConsumerController";
+import * as goodsController from "../controllers/GoodsController";
 import * as pushController from "../controllers/PushController";
+import * as shopController from "../controllers/ShopController";
 
 const router = new Router({
   prefix: "/api",

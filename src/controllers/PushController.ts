@@ -1,5 +1,5 @@
-import Koa from "koa";
 import FCM from "fcm-push";
+import Koa from "koa";
 import { getRepository } from "typeorm";
 import { Consumer } from "../db/entity/Consumer";
 import { Shop } from "../db/entity/Shop";
