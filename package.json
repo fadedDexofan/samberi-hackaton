@@ -4,7 +4,7 @@
   "description": "*******",
   "engines": {
     "node": "10.1.0",
-    "npm": "5.7.1"
+    "npm": "5.6.0"
   },
   "devDependencies": {
     "@types/es6-promise": ">=3.3.0",
