@@ -1,14 +1,10 @@
 {
   "type": "postgres",
-  "host": "ec2-54-75-244-248.eu-west-1.compute.amazonaws.com",
+  "host": "localhost",
   "port": 5432,
-  "username": "aaawysmbregvod",
-  "password":
-    "064ff309541cc53a37cf8c246e8cf8dffb7877a19f5414f727fcb93c7ccab945",
-  "database": "d5i82bs5jkj5ts",
-  "extra": {
-    "ssl": true
-  },
+  "username": "postgres",
+  "password": "",
+  "database": "samberi",
   "synchronize": true,
   "logging": true,
   "entities": ["dist/db/entity/**/*.js"],
