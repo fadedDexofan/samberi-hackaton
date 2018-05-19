@@ -5,9 +5,6 @@
     "strictNullChecks": true,
     "lib": ["es5", "es6"],
     "target": "esnext",
-    "engines": {
-      "node": "10.1.0"
-    },
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist",
