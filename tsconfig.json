@@ -5,9 +5,13 @@
     "strictNullChecks": true,
     "lib": ["esnext"],
     "types": ["node"],
-    "target": "esnext",
+    "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "src/types/*"]
+    },
     "outDir": "dist",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

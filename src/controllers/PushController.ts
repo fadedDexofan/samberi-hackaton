@@ -3,6 +3,7 @@ import Koa from "koa";
 import { getRepository } from "typeorm";
 import { Consumer } from "../db/entity/Consumer";
 import { Shop } from "../db/entity/Shop";
+import logger from "../utils/logger";
 
 const serverKey =
   "AAAATL1rL00:APA91bGb5ufymJ9DXCLIeys-KrEV8flZj8HJoVLWm8MDyg0FuFFvKFUU_HzG5mTAwyy5u4-hJly8yZolsryaYrEso_ZDwnZ1MurQ-DCFu2KbfTxlvMUGj-zuMvyhThcWljbZj-D80Ldo";
@@ -15,7 +16,7 @@ export const fbPush = async (ctx: Koa.Context) => {
   const shopRepository = getRepository(Shop);
   const consumer = await consumerRepository.findOneOrFail(userId);
   const shop = await shopRepository.findOneOrFail(shopId);
-  console.log(consumer, shop);
+  logger.debug(consumer.toString(), shop);
   const message = {
     to: "/topics/notifications", // required fill with device token or topics
     data: {
@@ -30,7 +31,6 @@ export const fbPush = async (ctx: Koa.Context) => {
     await fcm.send(message);
     ctx.body = { status: "ok" };
   } catch (err) {
-    console.log("Something has gone wrong!");
-    console.error(err);
+    throw new Error(err);
   }
 };

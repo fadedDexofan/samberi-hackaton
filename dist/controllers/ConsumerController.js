@@ -1,4 +1,12 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -9,29 +17,29 @@ const Consumer_1 = require("../db/entity/Consumer");
 const Goods_1 = require("../db/entity/Goods");
 const getConsumerById_1 = __importDefault(require("../helpers/getConsumerById"));
 const getConsumerByUUID_1 = __importDefault(require("../helpers/getConsumerByUUID"));
-exports.newConsumer = async (ctx) => {
+exports.newConsumer = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const consumerRepository = typeorm_1.getRepository(Consumer_1.Consumer);
     const consumer = consumerRepository.create(ctx.request.body);
-    await consumerRepository.save(consumer);
+    yield consumerRepository.save(consumer);
     ctx.status = 201;
     ctx.body = consumer;
-};
-exports.getAllConsumers = async (ctx) => {
+});
+exports.getAllConsumers = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const consumerRepository = typeorm_1.getRepository(Consumer_1.Consumer);
-    const consumers = await consumerRepository.find({
+    const consumers = yield consumerRepository.find({
         relations: ["currentShop"],
     });
     ctx.body = consumers;
-};
-exports.getConsumer = async (ctx) => {
+});
+exports.getConsumer = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const { consumerId } = ctx.params;
     const consumerRepository = typeorm_1.getRepository(Consumer_1.Consumer);
-    const consumer = await getConsumerById_1.default(consumerId);
+    const consumer = yield getConsumerById_1.default(consumerId);
     ctx.body = consumer;
-};
-exports.getConsumerBuys = async (ctx) => {
+});
+exports.getConsumerBuys = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const consumerRepository = typeorm_1.getRepository(Consumer_1.Consumer);
-    const consumer = await consumerRepository.findOneOrFail(ctx.params.id, {
+    const consumer = yield consumerRepository.findOneOrFail(ctx.params.id, {
         relations: [
             "buys",
             "buys.goods",
@@ -43,75 +51,75 @@ exports.getConsumerBuys = async (ctx) => {
         ],
     });
     ctx.body = consumer;
-};
-exports.updateConsumerBuy = async (ctx) => {
+});
+exports.updateConsumerBuy = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const { uuid, goods } = ctx.request.body;
     const buyRepository = typeorm_1.getRepository(Buy_1.Buy);
     const goodsRepository = typeorm_1.getRepository(Goods_1.Goods);
     const consumerRepository = typeorm_1.getRepository(Consumer_1.Consumer);
-    const consumer = await consumerRepository.findOneOrFail(ctx.params.id, {
+    const consumer = yield consumerRepository.findOneOrFail(ctx.params.id, {
         relations: ["buys"],
     });
-    const buy = await buyRepository.findOne({
+    const buy = yield buyRepository.findOne({
         where: { uuid },
         relations: ["goods"],
     });
     if (!buy) {
         const newBuy = buyRepository.create({ uuid, goods: [goods] });
-        await buyRepository.save(newBuy);
+        yield buyRepository.save(newBuy);
         consumer.buys.push(newBuy);
-        await consumerRepository.save(consumer);
+        yield consumerRepository.save(consumer);
         ctx.status = 201;
-        ctx.body = await getConsumerByUUID_1.default(ctx, uuid);
+        ctx.body = yield getConsumerByUUID_1.default(ctx, uuid);
         return;
     }
     if (goods) {
         buy.goods.push(goods);
-        await buyRepository.save(buy);
+        yield buyRepository.save(buy);
     }
-    ctx.body = await getConsumerByUUID_1.default(ctx, uuid);
-};
-exports.delFromConsumerBuy = async (ctx) => {
+    ctx.body = yield getConsumerByUUID_1.default(ctx, uuid);
+});
+exports.delFromConsumerBuy = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const { uuid, goods } = ctx.request.body;
     const goodsId = goods.id;
     const buyRepository = typeorm_1.getRepository(Buy_1.Buy);
-    const buy = await buyRepository.findOneOrFail({
+    const buy = yield buyRepository.findOneOrFail({
         where: { uuid },
         relations: ["goods"],
     });
     buy.goods = buy.goods.filter((val) => {
         return val.id !== goodsId;
     });
-    await buyRepository.save(buy);
+    yield buyRepository.save(buy);
     ctx.body = buy;
-};
-exports.setCurrentShop = async (ctx) => {
+});
+exports.setCurrentShop = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const { id: consumerId } = ctx.params;
     const { shopId } = ctx.request.body;
-    let consumer = await getConsumerById_1.default(consumerId);
+    let consumer = yield getConsumerById_1.default(consumerId);
     if (!consumer) {
         return;
     }
     consumer.currentShop = shopId;
-    await consumer.save();
-    consumer = await getConsumerById_1.default(consumerId);
+    yield consumer.save();
+    consumer = yield getConsumerById_1.default(consumerId);
     ctx.body = consumer;
-};
-exports.unsetCurrentShop = async (ctx) => {
+});
+exports.unsetCurrentShop = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const { id: consumerId } = ctx.params;
-    let consumer = await getConsumerById_1.default(consumerId);
+    let consumer = yield getConsumerById_1.default(consumerId);
     if (!consumer) {
         return;
     }
     consumer.currentShop = null;
-    await consumer.save();
-    consumer = await getConsumerById_1.default(consumerId);
+    yield consumer.save();
+    consumer = yield getConsumerById_1.default(consumerId);
     ctx.body = consumer;
-};
-exports.getTopBuys = async (ctx) => {
+});
+exports.getTopBuys = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const { id: consumerId } = ctx.params;
     const consumerRepository = typeorm_1.getRepository(Consumer_1.Consumer);
-    const consumer = await consumerRepository.findOne(consumerId, {
+    const consumer = yield consumerRepository.findOne(consumerId, {
         relations: ["buys", "buys.goods"],
     });
     if (!consumer) {
@@ -127,5 +135,5 @@ exports.getTopBuys = async (ctx) => {
     consumerGoods.forEach((val) => {
         val.forEach((goods) => allGoods.push(goods));
     });
-};
+});
 //# sourceMappingURL=C:/Users/faded/Documents/Code/Hackaton/samberi/dist/controllers/ConsumerController.js.map
