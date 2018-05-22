@@ -1,7 +1,6 @@
-// import { Buy } from "../db/entity/Buy";
-import { Buy } from "db/entity/Buy";
 import Koa from "koa";
 import { getRepository } from "typeorm";
+import { Buy } from "../db/entity/Buy";
 import { Consumer } from "../db/entity/Consumer";
 import { Goods } from "../db/entity/Goods";
 import getConsumerById from "../helpers/getConsumerById";
