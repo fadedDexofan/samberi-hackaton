@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const Goods_1 = require("./Goods");
 const Consumer_1 = require("./Consumer");
+const Goods_1 = require("./Goods");
 let Buy = class Buy extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -19,14 +19,23 @@ __decorate([
     __metadata("design:type", Number)
 ], Buy.prototype, "id", void 0);
 __decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Buy.prototype, "uuid", void 0);
+__decorate([
     typeorm_1.ManyToMany((type) => Goods_1.Goods),
     typeorm_1.JoinTable(),
     __metadata("design:type", Array)
 ], Buy.prototype, "goods", void 0);
 __decorate([
-    typeorm_1.ManyToMany((type) => Consumer_1.Consumer, (consumer) => consumer.buys),
-    __metadata("design:type", Array)
-], Buy.prototype, "consumers", void 0);
+    typeorm_1.ManyToOne((type) => Consumer_1.Consumer, (consumer) => consumer.buys),
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", Consumer_1.Consumer)
+], Buy.prototype, "consumer", void 0);
+__decorate([
+    typeorm_1.ManyToOne((type) => Consumer_1.Consumer, (sharedConsumer) => sharedConsumer.sharedBuys),
+    __metadata("design:type", Object)
+], Buy.prototype, "sharedConsumer", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)

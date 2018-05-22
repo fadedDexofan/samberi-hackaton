@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const Buy_1 = require("./Buy");
+const Shop_1 = require("./Shop");
 let Consumer = class Consumer extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -22,10 +23,21 @@ __decorate([
     __metadata("design:type", String)
 ], Consumer.prototype, "name", void 0);
 __decorate([
-    typeorm_1.ManyToMany((type) => Buy_1.Buy, (buy) => buy.consumers, { cascade: true }),
-    typeorm_1.JoinTable(),
+    typeorm_1.OneToMany((type) => Buy_1.Buy, (buy) => buy.consumer, { cascade: true }),
     __metadata("design:type", Array)
 ], Consumer.prototype, "buys", void 0);
+__decorate([
+    typeorm_1.OneToMany((type) => Buy_1.Buy, (sharedBuy) => sharedBuy.sharedConsumer, {
+        cascade: true,
+    }),
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", Array)
+], Consumer.prototype, "sharedBuys", void 0);
+__decorate([
+    typeorm_1.ManyToOne((type) => Shop_1.Shop, (currentShop) => currentShop.id),
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", Object)
+], Consumer.prototype, "currentShop", void 0);
 Consumer = __decorate([
     typeorm_1.Entity()
 ], Consumer);

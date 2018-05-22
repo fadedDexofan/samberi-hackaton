@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Consumer } from "./Consumer";
 
 @Entity()
 export class Shop extends BaseEntity {
@@ -8,4 +15,9 @@ export class Shop extends BaseEntity {
   public longitude: number;
   @Column({ type: "double precision" })
   public latitude: number;
+  @OneToMany(
+    (type) => Consumer,
+    (consumersInShop) => consumersInShop.currentShop,
+  )
+  public consumersInShop: Consumer[];
 }

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const Consumer_1 = require("./Consumer");
 let Shop = class Shop extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -28,6 +29,10 @@ __decorate([
     typeorm_1.Column({ type: "double precision" }),
     __metadata("design:type", Number)
 ], Shop.prototype, "latitude", void 0);
+__decorate([
+    typeorm_1.OneToMany((type) => Consumer_1.Consumer, (consumersInShop) => consumersInShop.currentShop),
+    __metadata("design:type", Array)
+], Shop.prototype, "consumersInShop", void 0);
 Shop = __decorate([
     typeorm_1.Entity()
 ], Shop);

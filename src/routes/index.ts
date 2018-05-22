@@ -11,10 +11,14 @@ const router = new Router({
 });
 
 router.get("/consumers/:id", consumerController.getConsumer);
-router.get("/consumers/:id/buys", consumerController.getConsumerBuys);
+router.put("/consumers/:id/shop", consumerController.setCurrentShop);
+router.del("/consumers/:id/shop", consumerController.unsetCurrentShop);
 router.get("/consumers", consumerController.getAllConsumers);
 router.post("/consumers", consumerController.newConsumer);
-router.post("/consumers/:id/buys", consumerController.newConsumerBuy);
+router.get("/consumers/:id/buys", consumerController.getConsumerBuys);
+router.get("/consumers/:id/buys/top", consumerController.getTopBuys);
+router.put("/consumers/:id/buys", consumerController.updateConsumerBuy);
+router.del("/consumers/:id/buys", consumerController.delFromConsumerBuy);
 
 router.get("/buys", buyController.getAllBuys);
 
@@ -29,5 +33,8 @@ router.post("/goods", goodsController.createGoods);
 router.get("/shops", shopController.getAllShops);
 
 router.post("/push", pushController.fbPush);
+
+router.put("/share", buyController.shareBuy);
+router.del("/share", buyController.unshareBuy);
 
 export default router;
