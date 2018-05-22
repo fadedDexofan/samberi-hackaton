@@ -1,11 +1,16 @@
 {
   "name": "samberi",
-  "version": "0.0.1",
-  "description": "*******",
+  "version": "0.1.0",
+  "description": "retailhack2018.ru mobile app backend",
   "engines": {
     "node": "10.1.0",
     "npm": "5.6.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fadedDexofan/samberi"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@types/es6-promise": ">=3.3.0",
     "@types/koa": "^2.0.45",
@@ -13,6 +18,7 @@
     "@types/koa-router": "^7.0.28",
     "@types/node": "^10.1.2",
     "concurrently": ">=3.5.1",
+    "husky": "^1.0.0-rc.6",
     "nodemon": ">=1.17.4",
     "tsc": ">=1.20150623.0",
     "tslint": ">=5.10.0",
@@ -41,6 +47,12 @@
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "debug": "npm run build && npm run watch-debug",
     "serve-debug": "nodemon --inspect dist/server.js",
-    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
+    "watch-debug":
+      "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run tslint"
+    }
   }
 }
